@@ -1,7 +1,6 @@
 package com.example.external_storage;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -15,10 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
     Button intercachebtn;
     @BindView(R.id.excachebtn)
     Button excachebtn;
-    @BindView(R.id.exprivatetn)
-    Button exprivatetn;
+    @BindView(R.id.exprivatebtn)
+    Button exprivatebtn;
     @BindView(R.id.epbtn)
     Button epbtn;
     @BindView(R.id.nextbtn)
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1212);
         }
@@ -70,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @OnClick(R.id.exprivatetn)
+    @OnClick(R.id.exprivatebtn)
     public void saveExternalPrivateData(View v) {
         File folder = getExternalFilesDir("saveExternalPrivateData");
         File myfile = new File(folder, "saveExternalPrivateData.txt");
